@@ -1,13 +1,17 @@
 import Pagination from "./Pagination";
 import ProductsHeader from "./Productshead";
 import Questions from "./Questions";
+import QuestionsProvider from "../context/questions.context";
 
 function Products() {
     return (
         <main className="w-fit mx-auto my-3">
-        <ProductsHeader/>
-        <Questions/>
-        <Pagination/>
+            <QuestionsProvider>
+                <ProductsHeader />
+                <Questions />
+                <Pagination />
+            </QuestionsProvider>
+
         </main>
     )
 }

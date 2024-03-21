@@ -26,14 +26,13 @@ function Footer() {
                         <li className="font-normal text-xl text-[#ADADAD]">Transition to PM role</li>
 
                     </ul>
-                    {/* <ul className="flex">
-                    </ul> */}
+                   
                     <div className="bg-gradient-to-r from-[#FFFFFF] to-[#211F1F] h-[1px] my-8"></div>
                 </div>
 
                 <ul className="flex gap-x-6 gap-y-4">
                     {
-                        Socials.map((social, idx) => <li id={idx}><img src={social.img} alt={social.alt}></img></li>)
+                        Socials.map((social, idx) => <li key={social.alt}><img src={social.img} alt={social.alt}></img></li>)
                     }
 
                 </ul>
