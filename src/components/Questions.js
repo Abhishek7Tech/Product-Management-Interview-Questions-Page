@@ -2,9 +2,8 @@ import { useContext} from "react";
 import { QuestionContext } from "../context/questions.context";
 function Questions() {
     const {questions} = useContext(QuestionContext);
-   console.log("QUESTIONS", questions);
     return (
-    <section className="min-h-[75vh]">
+    <section className="min-h-[85vh]">
         {questions.map((questions) => {
             return (
                 <div key={questions.id}>
