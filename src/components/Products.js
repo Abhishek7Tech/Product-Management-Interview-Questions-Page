@@ -5,7 +5,7 @@ import QuestionsProvider from "../context/questions.context";
 
 function Products() {
     return (
-        <main className="w-fit mx-auto my-3">
+        <main className="w-fit mx-4 md:mx-auto my-3">
             <QuestionsProvider>
                 <ProductsHeader />
                 <Questions />

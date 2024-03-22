@@ -1,7 +1,5 @@
 import { createContext, useState } from "react";
 import { QuestionsArray } from "../data";
-import Questions from "../components/Questions";
-console.log("QUESTION ARRAY", QuestionsArray.length);
 const filtersArray = [{
     id: "all",
     name: "All",
@@ -60,7 +58,8 @@ export const QuestionContext = createContext({
     page: 1,
     activeBtn: 1,
     pageHandler: () => null,
-    questionIndex: []
+    questionIndex: [],
+    prevPageHandler: () => null
 });
 
 
@@ -117,38 +116,75 @@ const QuestionsProvider = ({ children }) => {
 
 
         console.log("START", start, "END", end);
-
-        const questionsSlice = questionsByFilter.slice(start, end);
+        const questions = questionsByFilter;
+        const questionsSlice = questions.slice(start, end);
         setQuestions(questionsSlice);
         const newQuestionsIndex = [questionIndex[1], questionIndex[1] + questionsSlice.length]
         setQuestionsIdndex(newQuestionsIndex)
     }
+
+    function prevPageHandler(pageNo) {
+
+
+        if (pageNo === 1) {
+
+            return;
+        }
+
+
+        setActiveBtn(pageNo);
+        setStartIdx(startIdx - 1);
+
+        setPage(pageNo - 1);
+        setActiveBtn(pageNo - 1);
+        setStartIdx(pageNo - 1);
+
+        let start = 0;
+        let end = 10;
+        if (pageNo === 2) {
+            const questions = questionsByFilter;
+            const questionsSlice = questions.slice(start, end);
+            setQuestions(questionsSlice);
+            const newQuestionsIndex = [start, end];
+            setQuestionsIdndex(newQuestionsIndex)
+            // console.log("QUESTIONS_PREV", questionsSlice);
+            return;
+        }
+
+        start = (startIdx - 3) * 10;
+        end = (startIdx - 2) * 10;
+        // console.log("START_PREV", start, "END_PREV", end);
+
+        const questions = questionsByFilter;
+        const questionsSlice = questions.slice(start, end);
+        setQuestions(questionsSlice);
+        const newQuestionsIndex = [questionIndex[1] - questionIndex[0], questionIndex[0]];
+        setQuestionsIdndex(newQuestionsIndex);
+    }
+
     function filtersHandler(id) {
         console.log("ID", id);
-        if(id === "Product Design" || id === "All") {
+        if (id === "Product Design" || id === "All") {
             setQuestionsByFilter(QuestionsArray);
-            setQuestions(QuestionsArray.slice(0,10))
-        }else {
+            setQuestions(QuestionsArray.slice(0, 10))
+        } else {
             const updatedQuestionsArray = QuestionsArray.filter((questions) => questions.tags[1] === id && questions);
             setQuestionsByFilter(updatedQuestionsArray);
-            setQuestions(updatedQuestionsArray.slice(0,10))
+            setQuestions(updatedQuestionsArray.slice(0, 10))
 
         }
         const updatedFiltersArray = filters.map((button) => button.name === id ? { ...button, selected: !button.selected } : { ...button, selected: false });
         setFilters(updatedFiltersArray);
-        // setQuestionsByFilter(updatedQuestionsArray);
         setPage(1);
         setActiveBtn(1);
-        
+
 
         const newQuestionsIndex = [1, 10]
         setQuestionsIdndex(newQuestionsIndex);
         setStartIdx(2);
 
-        console.log("START IDX", startIdx, questionIndex);
     }
-    const values = { filters, filtersHandler, questions, questionIndex, questionsByFilter, page, activeBtn, pageHandler };
-    // setFilters(filtersHandler);
+    const values = { filters, filtersHandler, questions, questionIndex, questionsByFilter, page, activeBtn, pageHandler, prevPageHandler };
     return <QuestionContext.Provider value={values}>{children}</QuestionContext.Provider>
 }
 
