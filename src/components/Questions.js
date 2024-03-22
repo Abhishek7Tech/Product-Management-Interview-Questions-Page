@@ -2,7 +2,8 @@ import { useContext} from "react";
 import { QuestionContext } from "../context/questions.context";
 function Questions() {
     const {questions} = useContext(QuestionContext);
- return (
+   console.log("QUESTIONS", questions);
+    return (
     <section>
         {questions.map((questions) => {
             return (
