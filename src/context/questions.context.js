@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 import { QuestionsArray } from "../data";
+import Questions from "../components/Questions";
 console.log("QUESTION ARRAY", QuestionsArray.length);
 const filtersArray = [{
     id: "all",
@@ -108,7 +109,6 @@ const QuestionsProvider = ({ children }) => {
             start = (lastPage - 1) * 10;
             end = questionsByFilter.length;
             const questionsSlice = questionsByFilter.slice(start, end);
-            console.log("STARTIDX", startIdx, page, questionsSlice);
             setQuestions(questionsSlice);
             const newQuestionsIndex = [start, end];
             setQuestionsIdndex(newQuestionsIndex);
@@ -119,24 +119,33 @@ const QuestionsProvider = ({ children }) => {
         console.log("START", start, "END", end);
 
         const questionsSlice = questionsByFilter.slice(start, end);
-        console.log("STARTIDX", startIdx, page, questionsSlice);
         setQuestions(questionsSlice);
         const newQuestionsIndex = [questionIndex[1], questionIndex[1] + questionsSlice.length]
         setQuestionsIdndex(newQuestionsIndex)
     }
     function filtersHandler(id) {
+        console.log("ID", id);
+        if(id === "Product Design" || id === "All") {
+            setQuestionsByFilter(QuestionsArray);
+            setQuestions(QuestionsArray.slice(0,10))
+        }else {
+            const updatedQuestionsArray = QuestionsArray.filter((questions) => questions.tags[1] === id && questions);
+            setQuestionsByFilter(updatedQuestionsArray);
+            setQuestions(updatedQuestionsArray.slice(0,10))
 
+        }
         const updatedFiltersArray = filters.map((button) => button.name === id ? { ...button, selected: !button.selected } : { ...button, selected: false });
         setFilters(updatedFiltersArray);
-        const updatedQuestionsArray = QuestionsArray.filter((questions) => questions.tags[1] === id && questions);
-        // console.log("FILTERED QUESTIONS ARRAY", updatedQuestionsArray);
         // setQuestionsByFilter(updatedQuestionsArray);
         setPage(1);
         setActiveBtn(1);
-        const newQuestionsIndex = [1, questions.length]
+        
 
-        setQuestionsByFilter(updatedQuestionsArray);
-        setQuestionsIdndex(newQuestionsIndex)
+        const newQuestionsIndex = [1, 10]
+        setQuestionsIdndex(newQuestionsIndex);
+        setStartIdx(2);
+
+        console.log("START IDX", startIdx, questionIndex);
     }
     const values = { filters, filtersHandler, questions, questionIndex, questionsByFilter, page, activeBtn, pageHandler };
     // setFilters(filtersHandler);

@@ -12,7 +12,7 @@ function Pagination() {
         // console.log("EFFECT")
     // }, [page])
     // console.log("FIRST IDX", questionIndex);
-    console.log("PAGE", page)
+    console.log("PAGE", page, questionIndex)
     // console.log("PAGE", page, "Questions - Lenght", questions.length, "Questions By Filter", questionsByFilter.length);
     return (
         <section className="flex justify-end gap-4 py-4 items-center">
