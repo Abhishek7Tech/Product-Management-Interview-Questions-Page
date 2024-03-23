@@ -9,7 +9,7 @@ export const QuestionContext = createContext({
     questionsByFilter: [],
     page: 1,
     activeBtn: 1,
-    pageHandler: () => null,
+    nextPageHandler: () => null,
     questionIndex: [],
     prevPageHandler: () => null
 });
@@ -24,7 +24,7 @@ const QuestionsProvider = ({ children }) => {
     const [activeBtn, setActiveBtn] = useState(page);
     const [questionIndex, setQuestionsIdndex] = useState([1, questions.length]);
 
-    function pageHandler(pageNo) {
+    function nextPageHandler(pageNo) {
         const lastPage = Math.ceil(questionsByFilter.length / 10);
         // if (page >= lastPage) {
         //     return;
@@ -136,7 +136,7 @@ const QuestionsProvider = ({ children }) => {
         setStartIdx(2);
 
     }
-    const values = { filters, filtersHandler, questions, questionIndex, questionsByFilter, page, activeBtn, pageHandler, prevPageHandler };
+    const values = { filters, filtersHandler, questions, questionIndex, questionsByFilter, page, activeBtn, nextPageHandler, prevPageHandler };
     return <QuestionContext.Provider value={values}>{children}</QuestionContext.Provider>
 }
 
