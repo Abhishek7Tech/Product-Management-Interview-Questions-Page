@@ -13,7 +13,7 @@ function Navbar() {
             {/* <div> */}
 
             <a href="#">
-                <h1 className="text-2xl md:text-[40px] leading-[48.76px] font-extrabold text-[#FFFFFF] font-mono">Crework<span className="text-[#FAAF3D]">.</span></h1>
+                <h1 className="text-2xl md:text-[40px] leading-[48.76px] font-extrabold text-[#FFFFFF] font-mono">Quest<span className="text-[#FAAF3D]">.</span></h1>
             </a>
             {/* </div> */}
             {windowWidth.current > width && <ul className="flex justify-between w-[487px]">

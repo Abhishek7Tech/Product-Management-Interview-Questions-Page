@@ -20,7 +20,7 @@ function Footer() {
         <footer className="mx-4 md:mx-20 md:pt-6 py-2">
             <div className="flex flex-col md:flex-row items-center md:items-start md:justify-between">
                 <a href="#">
-                    <h1 className="text-base md:text-[40px] md:leading-[48.76px] font-extrabold font-mono text-[#FFFFFF] my-6 md:my-0">Crework<span className="text-[#FAAF3D]">.</span></h1>
+                    <h1 className="text-base md:text-[40px] md:leading-[48.76px] font-extrabold font-mono text-[#FFFFFF] my-6 md:my-0">Quest<span className="text-[#FAAF3D]">.</span></h1>
                 </a>
 
                 <div className="w-10/12 md:w-auto flex flex-col items-center">
