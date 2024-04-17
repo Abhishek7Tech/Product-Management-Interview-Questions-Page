@@ -105,12 +105,13 @@ const QuestionsProvider = ({ children }) => {
 
         start = (startIdx - 3) * 10;
         end = (startIdx - 2) * 10;
-        // console.log("START_PREV", start, "END_PREV", end);
+        console.log("START_PREV", start, "END_PREV", end);
 
         const questions = questionsByFilter;
         const questionsSlice = questions.slice(start, end);
         setQuestions(questionsSlice);
-        const newQuestionsIndex = [questionIndex[1] - questionIndex[0], questionIndex[0]];
+        const newQuestionsIndex = [questionIndex[0] - 10, questionIndex[0]];
+        // console.log("QUESTIONS IDX", newQuestionsIndex, start, start - 10 )
         setQuestionsIdndex(newQuestionsIndex);
     }
 
